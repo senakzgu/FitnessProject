@@ -55,22 +55,41 @@ namespace FitnessApp.Controllers
         }
 
         // POST: Appointments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,MemberName,Date,Time,ServiceId,TrainerId,Price,IsApproved")] Appointment appointment)
         {
+            // ÇAKIŞMA KONTROLÜ
+            bool isConflict = _context.Appointments.Any(a =>
+                a.TrainerId == appointment.TrainerId &&
+                a.Date == appointment.Date &&
+                a.Time == appointment.Time
+            );
+
+            if (isConflict)
+            {
+                ModelState.AddModelError("", "Bu eğitmen bu tarih ve saatte zaten dolu.");
+
+                // Dropdown'ları tekrar doldur
+                ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", appointment.ServiceId);
+                ViewData["TrainerId"] = new SelectList(_context.Trainers, "Id", "Name", appointment.TrainerId);
+
+                return View(appointment);
+            }
+
+            // Normal kayıt
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name", appointment.ServiceId);
             ViewData["TrainerId"] = new SelectList(_context.Trainers, "Id", "Name", appointment.TrainerId);
             return View(appointment);
         }
+
 
         // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -197,6 +216,21 @@ namespace FitnessApp.Controllers
 
         return Json(service.Price);
     }
+
+        [HttpGet]
+        public IActionResult GetServicesByTrainer(int trainerId)
+        {
+            var services = _context.TrainerServices
+                .Where(ts => ts.TrainerId == trainerId)
+                .Select(ts => new 
+                {
+                    id = ts.Service.Id,
+                    name = ts.Service.Name
+                })
+                .ToList();
+
+            return Json(services);
+        }
 
 
     }

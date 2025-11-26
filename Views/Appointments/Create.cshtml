@@ -100,5 +100,28 @@
                 });
         });
         document.getElementById("ServiceId").dispatchEvent(new Event("change"));
+                // TRAINER → Hizmet listesini getir
+        document.getElementById("TrainerId").addEventListener("change", function () {
+            const trainerId = this.value;
+
+            fetch("/Appointments/GetServicesByTrainer?trainerId=" + trainerId)
+                .then(res => res.json())
+                .then(services => {
+                    const serviceDropdown = document.getElementById("ServiceId");
+                    serviceDropdown.innerHTML = "<option value=''>Hizmet seçiniz</option>";
+
+                    services.forEach(s => {
+                        const option = document.createElement("option");
+                        option.value = s.id;
+                        option.text = s.name;
+                        serviceDropdown.appendChild(option);
+                    });
+
+                    // Hizmet listesi değişti → Fiyatın güncellenmesi için tetikle
+                    serviceDropdown.dispatchEvent(new Event("change"));
+                });
+        });
+    
+
     </script>
 }

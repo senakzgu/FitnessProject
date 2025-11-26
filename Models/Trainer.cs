@@ -12,5 +12,9 @@ namespace FitnessApp.Models
         // Foreign Key - bağlı olduğu salon
         public int GymId { get; set; }
         public Gym? Gym { get; set; }
+        public List<TrainerService>? TrainerServices { get; set; }
+
     }
 }
+
+

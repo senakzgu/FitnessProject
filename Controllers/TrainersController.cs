@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FitnessApp.Data;
 using FitnessApp.Models;
+using FitnessApp.Models.ViewModels; 
 
 namespace FitnessApp.Controllers
 {
@@ -22,8 +23,13 @@ namespace FitnessApp.Controllers
         // GET: Trainers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Trainers.Include(t => t.Gym);
-            return View(await applicationDbContext.ToListAsync());
+            var trainers = _context.Trainers
+                .Include(t => t.Gym)
+                .Include(t => t.TrainerServices)
+                    .ThenInclude(ts => ts.Service);
+
+            return View(await trainers.ToListAsync());
+
         }
 
         // GET: Trainers/Details/5
@@ -48,8 +54,13 @@ namespace FitnessApp.Controllers
         // GET: Trainers/Create
         public IActionResult Create()
         {
+            var vm = new TrainerEditViewModel
+            {
+                AllServices = _context.Services.ToList()
+            };
+
             ViewData["GymId"] = new SelectList(_context.Gyms, "Id", "Name");
-            return View();
+            return View(vm);
         }
 
         // POST: Trainers/Create
@@ -57,17 +68,31 @@ namespace FitnessApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Specialty,WorkingHours,GymId")] Trainer trainer)
+        public async Task<IActionResult> Create(TrainerEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(trainer);
+                // Trainer kaydet
+                _context.Add(vm.Trainer);
+                await _context.SaveChangesAsync();
+
+                // Hizmet ilişkilerini ekle
+                foreach (var serviceId in vm.SelectedServiceIds)
+                {
+                    _context.TrainerServices.Add(new TrainerService
+                    {
+                        TrainerId = vm.Trainer.Id,
+                        ServiceId = serviceId
+                    });
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GymId"] = new SelectList(_context.Gyms, "Id", "Name", trainer.GymId);
 
-            return View(trainer);
+            vm.AllServices = _context.Services.ToList();
+            ViewData["GymId"] = new SelectList(_context.Gyms, "Id", "Name");
+            return View(vm);
         }
 
         // GET: Trainers/Edit/5

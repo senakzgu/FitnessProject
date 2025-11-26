@@ -10,5 +10,7 @@ namespace FitnessApp.Models
         // Bağlı olduğu salon
         public int GymId { get; set; }
         public Gym? Gym { get; set; }
+        public List<TrainerService>? TrainerServices { get; set; }
+
     }
 }
