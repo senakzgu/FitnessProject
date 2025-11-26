@@ -1,0 +1,104 @@
+@model FitnessApp.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemberName" class="control-label"></label>
+                <input asp-for="MemberName" class="form-control" />
+                <span asp-validation-for="MemberName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceId" class="control-label"></label>
+                <select asp-for="ServiceId"  id="ServiceId" class ="form-control" asp-items="ViewBag.ServiceId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainerId" class="control-label"></label>
+                <select asp-for="TrainerId" id="TrainerId" class ="form-control" asp-items="ViewBag.TrainerId"></select>
+            </div>
+               <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" type="date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <select asp-for="Time" id="timeDropdown" class="form-control">
+                    <option value="">Saat seçiniz</option>
+                </select>
+
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" id="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // Trainer seçilince saatleri getir
+        document.getElementById("TrainerId").addEventListener("change", function () {
+            const trainerId = this.value;
+            console.log("Trainer ID değişti:", trainerId);
+
+            fetch("/Appointments/GetAvailableHours?trainerId=" + trainerId)
+                .then(res => res.json())
+                .then(hours => {
+                    console.log("Saatler:", hours);
+
+                    const dropdown = document.getElementById("timeDropdown");
+                    dropdown.innerHTML = "<option value=''>Saat seçiniz</option>";
+
+                    hours.forEach(h => {
+                        const option = document.createElement("option");
+                        option.value = h;
+                        option.text = h;
+                        dropdown.appendChild(option);
+                    });
+                });
+        });
+
+        // SAYFA AÇILIR AÇILMAZ trainer saatlerini getir
+        document.getElementById("TrainerId").dispatchEvent(new Event("change"));
+
+        // SERVICE seçilince fiyatı getir
+        document.getElementById("ServiceId").addEventListener("change", function () {
+            const serviceId = this.value;
+
+            fetch("/Appointments/GetServicePrice?serviceId=" + serviceId)
+                .then(res => res.json())
+                .then(price => {
+                    console.log("Servis ücreti:", price);
+                    document.getElementById("Price").value = price;
+                });
+        });
+        document.getElementById("ServiceId").dispatchEvent(new Event("change"));
+    </script>
+}

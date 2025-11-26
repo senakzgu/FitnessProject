@@ -13,8 +13,7 @@ namespace FitnessApp.Data
         public DbSet<Gym> Gyms { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Service> Services { get; set; }
-
-
-
+        public DbSet<Appointment> Appointments { get; set; }
+        
     }
 }
