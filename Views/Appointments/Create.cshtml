@@ -1,0 +1,155 @@
+@model FitnessApp.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemberName" class="control-label"></label>
+                <input asp-for="MemberName" class="form-control" />
+                <span asp-validation-for="MemberName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GymId" class="control-label"></label>
+                <select asp-for="GymId" id="GymId" class="form-control" asp-items="ViewBag.GymId">
+                    <option value="">Salon seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceId" class="control-label"></label>
+                <select asp-for="ServiceId"  id="ServiceId" class ="form-control" asp-items="ViewBag.ServiceId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainerId" class="control-label"></label>
+                <select asp-for="TrainerId" id="TrainerId" class="form-control">
+                    <option value="">Önce hizmet seçiniz</option>
+                </select>
+                <span asp-validation-for="TrainerId" class="text-danger"></span>
+            </div>
+               <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" type="date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <select asp-for="Time" id="timeDropdown" class="form-control">
+                    <option value="">Saat seçiniz</option>
+                </select>
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" id="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+<script>
+
+    // 1) GYM → SERVICE
+    document.getElementById("GymId").addEventListener("change", function () {
+        const gymId = this.value;
+
+        fetch(`/Appointments/GetServicesByGym?gymId=${gymId}`)
+            .then(res => res.json())
+            .then(services => {
+                const serviceDropdown = document.getElementById("ServiceId");
+                serviceDropdown.innerHTML = "<option value=''>Hizmet seçiniz</option>";
+
+                services.forEach(s => {
+                    const opt = document.createElement("option");
+                    opt.value = s.id;
+                    opt.text = s.name;
+                    serviceDropdown.appendChild(opt);
+                });
+
+                // Hizmet değişince diğer alanlar temizleniyor
+                document.getElementById("TrainerId").innerHTML = "<option value=''>Önce hizmet seçiniz</option>";
+                document.getElementById("timeDropdown").innerHTML = "<option value=''>Saat seçiniz</option>";
+                document.getElementById("Price").value = "";
+            });
+    });
+
+
+
+    // 2) SERVICE → TRAINER
+    document.getElementById("ServiceId").addEventListener("change", function () {
+        const serviceId = this.value;
+
+        fetch(`/Appointments/GetTrainersByService?serviceId=${serviceId}`)
+            .then(res => res.json())
+            .then(trainers => {
+                const trainerDropdown = document.getElementById("TrainerId");
+                trainerDropdown.innerHTML = "<option value=''>Eğitmen seçiniz</option>";
+
+                trainers.forEach(t => {
+                    const opt = document.createElement("option");
+                    opt.value = t.id;
+                    opt.text = t.name;
+                    trainerDropdown.appendChild(opt);
+                });
+
+                // Temizle
+                document.getElementById("timeDropdown").innerHTML = "<option value=''>Saat seçiniz</option>";
+            });
+    });
+
+
+
+    // 3) TRAINER → SAAT
+    document.getElementById("TrainerId").addEventListener("change", function () {
+        const trainerId = this.value;
+
+        fetch(`/Appointments/GetAvailableHours?trainerId=${trainerId}`)
+            .then(res => res.json())
+            .then(hours => {
+                const timeDropdown = document.getElementById("timeDropdown");
+                timeDropdown.innerHTML = "<option value=''>Saat seçiniz</option>";
+
+                hours.forEach(h => {
+                    const opt = document.createElement("option");
+                    opt.value = h;
+                    opt.text = h;
+                    timeDropdown.appendChild(opt);
+                });
+            });
+    });
+
+
+
+    // 4) SERVICE → FİYAT
+    document.getElementById("ServiceId").addEventListener("change", function () {
+        const serviceId = this.value;
+
+        fetch(`/Appointments/GetServicePrice?serviceId=${serviceId}`)
+            .then(res => res.json())
+            .then(price => {
+                document.getElementById("Price").value = price;
+            });
+    });
+
+</script>
+}

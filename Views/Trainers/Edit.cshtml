@@ -1,0 +1,46 @@
+@model FitnessApp.Models.ViewModels.TrainerEditViewModel
+
+<h1>Edit Trainer</h1>
+<hr />
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Trainer.Id" />
+
+    <div class="form-group">
+        <label asp-for="Trainer.Name"></label>
+        <input asp-for="Trainer.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainer.Specialty"></label>
+        <input asp-for="Trainer.Specialty" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainer.WorkingHours"></label>
+        <input asp-for="Trainer.WorkingHours" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainer.GymId">Gym</label>
+        <select asp-for="Trainer.GymId" class="form-control" asp-items="ViewBag.GymId"></select>
+    </div>
+
+    <h4>Uzmanlık Alanları (Verdiği Hizmetler)</h4>
+    <div>
+        @foreach (var s in Model.AllServices)
+        {
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="SelectedServiceIds"
+                       value="@s.Id"
+                       @(Model.SelectedServiceIds.Contains(s.Id) ? "checked" : "") />
+
+                <label class="form-check-label">@s.Name</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+</form>
