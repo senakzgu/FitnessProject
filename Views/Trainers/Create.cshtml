@@ -1,13 +1,10 @@
 @model FitnessApp.Models.ViewModels.TrainerEditViewModel
 
-@{
-    ViewData["Title"] = "Create Trainer";
-}
-
 <h1>Create Trainer</h1>
-<hr />
 
 <form asp-action="Create">
+
+    <!-- Eğitmen Bilgileri -->
     <div class="form-group">
         <label asp-for="Trainer.Name"></label>
         <input asp-for="Trainer.Name" class="form-control" />
@@ -20,27 +17,59 @@
 
     <div class="form-group">
         <label asp-for="Trainer.WorkingHours"></label>
-        <input asp-for="Trainer.WorkingHours" class="form-control" />
+        <input asp-for="Trainer.WorkingHours" class="form-control" placeholder="08:00-18:00" />
     </div>
 
+    <!-- SALON SEÇ -->
     <div class="form-group">
-        <label asp-for="Trainer.GymId">Gym</label>
-        <select asp-for="Trainer.GymId" class="form-control" asp-items="ViewBag.GymId"></select>
+        <label asp-for="Trainer.GymId"></label>
+        <select asp-for="Trainer.GymId" id="GymId" class="form-control" asp-items="ViewBag.GymId">
+            <option value="">Salon seçiniz</option>
+        </select>
     </div>
 
-    <h4>Uzmanlık Alanları (Verdiği Hizmetler)</h4>
-    <div>
-        @foreach (var s in Model.AllServices)
-        {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"
-                       name="SelectedServiceIds"
-                       value="@s.Id" />
+    <!-- DİNAMİK HİZMET LİSTESİ -->
+    <h4>Bu eğitmenin verebileceği hizmetler</h4>
 
-                <label class="form-check-label">@s.Name</label>
-            </div>
-        }
+    <div id="services-area">
+        <p>Önce salon seçiniz</p>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">Create</button>
+    <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
 </form>
+
+@section Scripts {
+<script>
+document.getElementById("GymId").addEventListener("change", function () {
+    const gymId = this.value;
+    const area = document.getElementById("services-area");
+
+    if (!gymId) {
+        area.innerHTML = "<p>Önce salon seçiniz</p>";
+        return;
+    }
+
+    fetch(`/Services/GetServicesByGym?gymId=${gymId}`)
+        .then(res => res.json())
+        .then(list => {
+            if (list.length === 0) {
+                area.innerHTML = "<p>Bu salonda hizmet tanımlı değil.</p>";
+                return;
+            }
+
+            let html = "<ul class='list-group'>";
+            list.forEach(s => {
+                html += `
+                    <li class="list-group-item">
+                        <input type="checkbox" name="SelectedServiceIds" value="${s.id}" />
+                        ${s.name}
+                    </li>
+                `;
+            });
+            html += "</ul>";
+
+            area.innerHTML = html;
+        });
+});
+</script>
+}

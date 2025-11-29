@@ -1,127 +1,178 @@
 @model FitnessApp.Models.Appointment
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Appointment";
 }
 
-<h1>Edit</h1>
-
-<h4>Appointment</h4>
+<h1>Edit Appointment</h1>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group">
-                <label asp-for="MemberName" class="control-label"></label>
+                <label asp-for="MemberName"></label>
                 <input asp-for="MemberName" class="form-control" />
-                <span asp-validation-for="MemberName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
+                <label asp-for="GymId"></label>
+                <select asp-for="GymId" id="GymId" class="form-control" asp-items="ViewBag.GymId">
+                    <option value="">Salon seçiniz</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ServiceId"></label>
+                <select asp-for="ServiceId" id="ServiceId" class="form-control" asp-items="ViewBag.ServiceId">
+                    <option value="">Hizmet seçiniz</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TrainerId"></label>
+                <select asp-for="TrainerId" id="TrainerId" class="form-control" asp-items="ViewBag.TrainerId">
+                    <option value="">Eğitmen seçiniz</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date"></label>
                 <input asp-for="Date" type="date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Time" class="control-label"></label>
+                <label asp-for="Time"></label>
                 <select asp-for="Time" id="timeDropdown" class="form-control">
                     <option value="">Saat seçiniz</option>
                 </select>
-                <span asp-validation-for="Time" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ServiceId" class="control-label"></label>
-                <select asp-for="ServiceId" id="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
-                <span asp-validation-for="ServiceId" class="text-danger"></span>
-            </div>
-
-            <!-- DÜZELTİLEN KISIM -->
-            <div class="form-group">
-                <label asp-for="TrainerId" class="control-label"></label>
-                <select asp-for="TrainerId" id="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
-                <span asp-validation-for="TrainerId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" id="Price"/>
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="Price"></label>
+                <input asp-for="Price" id="Price" class="form-control" />
             </div>
 
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                    <input class="form-check-input" asp-for="IsApproved" />
+                    @Html.DisplayNameFor(m => m.IsApproved)
                 </label>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Geri</a>
 </div>
 
 @section Scripts {
     <script>
-        // Trainer değişince hizmetleri getir
-        document.getElementById("TrainerId").addEventListener("change", function () {
-            const trainerId = this.value;
 
-            // Hizmet listesini getir
-            fetch("/Appointments/GetServicesByTrainer?trainerId=" + trainerId)
-                .then(res => res.json())
-                .then(services => {
-                    const serviceDropdown = document.getElementById("ServiceId");
-                    serviceDropdown.innerHTML = "<option value=''>Hizmet seçiniz</option>";
+// ============= GYM → SERVICES =============
+document.getElementById("GymId").addEventListener("change", function () {
+    const gymId = this.value;
 
-                    services.forEach(s => {
-                        const option = document.createElement("option");
-                        option.value = s.id;
-                        option.text = s.name;
-                        serviceDropdown.appendChild(option);
-                    });
+    fetch(`/Appointments/GetServicesByGym?gymId=${gymId}`)
+        .then(res => res.json())
+        .then(services => {
 
-                    serviceDropdown.dispatchEvent(new Event("change"));
-                });
+            const serviceDropdown = document.getElementById("ServiceId");
+            serviceDropdown.innerHTML = "<option value=''>Hizmet seçiniz</option>";
 
-            // Saatleri getir
-            fetch("/Appointments/GetAvailableHours?trainerId=" + trainerId)
-                .then(res => res.json())
-                .then(hours => {
-                    const timeDropdown = document.getElementById("timeDropdown");
-                    timeDropdown.innerHTML = "<option value=''>Saat seçiniz</option>";
+            services.forEach(s => {
+                const opt = document.createElement("option");
+                opt.value = s.id;
+                opt.text = s.name;
+                serviceDropdown.appendChild(opt);
+            });
 
-                    hours.forEach(h => {
-                        const opt = document.createElement("option");
-                        opt.value = h;
-                        opt.text = h;
-                        timeDropdown.appendChild(opt);
-                    });
-                });
+            clearTrainer();
+            clearHours();
+            clearPrice();
+        });
+});
+
+// ============= SERVICE → TRAINERS =============
+document.getElementById("ServiceId").addEventListener("change", function () {
+    const serviceId = this.value;
+
+    fetch(`/Appointments/GetTrainersByService?serviceId=${serviceId}`)
+        .then(res => res.json())
+        .then(trainers => {
+
+            const trainerDropdown = document.getElementById("TrainerId");
+            trainerDropdown.innerHTML = "<option value=''>Eğitmen seçiniz</option>";
+
+            trainers.forEach(t => {
+                const opt = document.createElement("option");
+                opt.value = t.id;
+                opt.text = t.name;
+                trainerDropdown.appendChild(opt);
+            });
+
+            clearHours();
         });
 
-        // Service → fiyat getir
-        document.getElementById("ServiceId").addEventListener("change", function () {
-            const serviceId = this.value;
+    fetch(`/Appointments/GetServicePrice?serviceId=${serviceId}`)
+        .then(res => res.json())
+        .then(price => { document.getElementById("Price").value = price; });
+});
 
-            fetch("/Appointments/GetServicePrice?serviceId=" + serviceId)
-                .then(res => res.json())
-                .then(price => {
-                    document.getElementById("Price").value = price;
-                });
+// ============= TRAINER → HOURS =============
+document.getElementById("TrainerId").addEventListener("change", function () {
+    const trainerId = this.value;
+
+    fetch(`/Appointments/GetAvailableHours?trainerId=${trainerId}`)
+        .then(res => res.json())
+        .then(hours => {
+            const timeDropdown = document.getElementById("timeDropdown");
+            timeDropdown.innerHTML = "<option value=''>Saat seçiniz</option>";
+
+            hours.forEach(h => {
+                const opt = document.createElement("option");
+                opt.value = h;
+                opt.text = h;
+                timeDropdown.appendChild(opt);
+            });
+
+            // Mevcut saati geri seç
+            const current = "@Model.Time";
+            if (current) timeDropdown.value = current;
         });
+});
 
-        // SAYFA AÇILIR AÇILMAZ trainer change tetikle
+// ======= Yardımcı Temizleyiciler =========
+function clearTrainer() {
+    document.getElementById("TrainerId").innerHTML =
+        "<option value=''>Önce hizmet seçiniz</option>";
+}
+
+function clearHours() {
+    document.getElementById("timeDropdown").innerHTML =
+        "<option value=''>Saat seçiniz</option>";
+}
+
+function clearPrice() {
+    document.getElementById("Price").value = "";
+}
+
+// ========= Sayfa açıldığında mevcut değerleri yükle =========
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("GymId").dispatchEvent(new Event("change"));
+    setTimeout(() => {
+        document.getElementById("ServiceId").dispatchEvent(new Event("change"));
+    }, 200);
+    setTimeout(() => {
         document.getElementById("TrainerId").dispatchEvent(new Event("change"));
+    }, 400);
+});
 
     </script>
 }

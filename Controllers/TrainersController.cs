@@ -68,21 +68,19 @@ namespace FitnessApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrainerEditViewModel vm)
+        public async Task<IActionResult> Create(Trainer trainer, List<int> SelectedServiceIds)
         {
             if (ModelState.IsValid)
             {
-                // Trainer kaydet
-                _context.Add(vm.Trainer);
+                _context.Add(trainer);
                 await _context.SaveChangesAsync();
 
-                // Hizmet ilişkilerini ekle
-                foreach (var serviceId in vm.SelectedServiceIds)
+                foreach (var id in SelectedServiceIds)
                 {
                     _context.TrainerServices.Add(new TrainerService
                     {
-                        TrainerId = vm.Trainer.Id,
-                        ServiceId = serviceId
+                        TrainerId = trainer.Id,
+                        ServiceId = id
                     });
                 }
 
@@ -90,10 +88,9 @@ namespace FitnessApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            vm.AllServices = _context.Services.ToList();
-            ViewData["GymId"] = new SelectList(_context.Gyms, "Id", "Name");
-            return View(vm);
+            return View(trainer);
         }
+
 
         // GET: Trainers/Edit/5
         public async Task<IActionResult> Edit(int? id)

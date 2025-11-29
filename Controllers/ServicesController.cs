@@ -52,11 +52,6 @@ namespace FitnessApp.Controllers
             return View();
         }
     
-
-
-        // POST: Services/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Duration,Price,GymId")] Service service)
@@ -67,9 +62,12 @@ namespace FitnessApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GymId"] = new SelectList(_context.Gyms, "Id", "Name", service.GymId);
+
+            ViewBag.GymId = new SelectList(_context.Gyms, "Id", "Name", service.GymId);
             return View(service);
         }
+
+   
 
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -162,5 +160,21 @@ namespace FitnessApp.Controllers
         {
             return _context.Services.Any(e => e.Id == id);
         }
+
+        [HttpGet]
+        public IActionResult GetServicesByGym(int gymId)
+        {
+            var services = _context.Services
+                .Where(s => s.GymId == gymId)
+                .Select(s => new {
+                    id = s.Id,
+                    name = s.Name
+                })
+                .ToList();
+
+            return Json(services);
+        }
+
+
     }
 }

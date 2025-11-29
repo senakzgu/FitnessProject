@@ -27,20 +27,75 @@
     </div>
 
     <h4>Uzmanlık Alanları (Verdiği Hizmetler)</h4>
-    <div>
-        @foreach (var s in Model.AllServices)
-        {
-            <div class="form-check">
-                <input class="form-check-input"
-                       type="checkbox"
-                       name="SelectedServiceIds"
-                       value="@s.Id"
-                       @(Model.SelectedServiceIds.Contains(s.Id) ? "checked" : "") />
-
-                <label class="form-check-label">@s.Name</label>
-            </div>
-        }
+    <div id="services-area">
+        <p>Salon seçiniz...</p>
     </div>
+
 
     <button type="submit" class="btn btn-primary mt-3">Save</button>
 </form>
+
+@section Scripts {
+<script>
+
+function loadServices(gymId, selectedIds) {
+
+    if (!gymId) {
+        document.getElementById("services-area").innerHTML =
+            "<p>Önce salon seçiniz...</p>";
+        return;
+    }
+
+    fetch(`/Services/GetServicesByGym?gymId=${gymId}`)
+        .then(res => res.json())
+        .then(list => {
+
+            const div = document.getElementById("services-area");
+
+            if (list.length === 0) {
+                div.innerHTML = "<p>Bu salona ait hizmet bulunmuyor.</p>";
+                return;
+            }
+
+            let html = "<ul class='list-group'>";
+
+            list.forEach(s => {
+                const isChecked = selectedIds.includes(s.id) ? "checked" : "";
+                html += `
+                    <li class="list-group-item">
+                        <input type="checkbox" name="SelectedServiceIds"
+                               value="${s.id}" ${isChecked} />
+                        ${s.name}
+                    </li>`;
+            });
+
+            html += "</ul>";
+
+            div.innerHTML = html;
+        });
+}
+
+
+// 👉 Page Loaded → mevcut salon ve seçili hizmetleri yükle
+document.addEventListener("DOMContentLoaded", function () {
+
+    const gymId = document.getElementById("Trainer_GymId").value;
+
+    // Model.SelectedServiceIds’ı JS'ye aktarıyoruz
+    const selected = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SelectedServiceIds));
+
+    loadServices(gymId, selected);
+});
+
+
+// 👉 Gym değişince otomatik hizmetleri güncelle
+document.getElementById("Trainer_GymId").addEventListener("change", function () {
+
+    const gymId = this.value;
+
+    // Yeni gym seçilince seçili hizmetler sıfırlanmalı
+    loadServices(gymId, []);
+});
+
+</script>
+}

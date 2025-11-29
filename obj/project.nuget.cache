@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xW7QPVfnjhw=",
+  "dgSpecHash": "sbeZDaa2RZ0=",
   "success": true,
-  "projectFilePath": "/Users/senakuzgu/Desktop/FitnessProject/FitnessApp/FitnessApp.csproj",
+  "projectFilePath": "/Users/senakuzgu/Desktop/FitnessProject-main/FitnessApp.csproj",
   "expectedPackageFiles": [
     "/Users/senakuzgu/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/senakuzgu/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
