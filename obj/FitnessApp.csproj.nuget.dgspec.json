@@ -1,17 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj": {}
+<<<<<<< HEAD
+    "/Users/senakuzgu/Desktop/proje2/FitnessApp.csproj": {}
   },
   "projects": {
-    "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj": {
+    "/Users/senakuzgu/Desktop/proje2/FitnessApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj",
+        "projectUniqueName": "/Users/senakuzgu/Desktop/proje2/FitnessApp.csproj",
         "projectName": "FitnessApp",
-        "projectPath": "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj",
+        "projectPath": "/Users/senakuzgu/Desktop/proje2/FitnessApp.csproj",
         "packagesPath": "/Users/senakuzgu/.nuget/packages/",
-        "outputPath": "/Users/senakuzgu/Documents/GitHub/FitnessProject/obj/",
+        "outputPath": "/Users/senakuzgu/Desktop/proje2/obj/",
+=======
+    "/Users/senakuzgu/Desktop/FitnessProject-main/FitnessApp.csproj": {}
+  },
+  "projects": {
+    "/Users/senakuzgu/Desktop/FitnessProject-main/FitnessApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/senakuzgu/Desktop/FitnessProject-main/FitnessApp.csproj",
+        "projectName": "FitnessApp",
+        "projectPath": "/Users/senakuzgu/Desktop/FitnessProject-main/FitnessApp.csproj",
+        "packagesPath": "/Users/senakuzgu/.nuget/packages/",
+        "outputPath": "/Users/senakuzgu/Desktop/FitnessProject-main/obj/",
+>>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/senakuzgu/.nuget/NuGet/NuGet.Config"
@@ -43,6 +57,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+<<<<<<< HEAD
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+=======
+>>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -53,6 +78,13 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+<<<<<<< HEAD
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+=======
+>>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.0, )"

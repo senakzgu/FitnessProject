@@ -1,6 +1,73 @@
 @model IEnumerable<FitnessApp.Models.Appointment>
 
 @{
+<<<<<<< HEAD
+    ViewData["Title"] = "Randevular";
+}
+
+<h1>Randevular</h1>
+
+@if (User.IsInRole("Uye"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Randevu Oluştur</a>
+    </p>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Üye</th>
+            <th>Tarih</th>
+            <th>Saat</th>
+            <th>Hizmet</th>
+            <th>Eğitmen</th>
+            <th>Ücret</th>
+            <th>Durum</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MemberName</td>
+                <td>@item.Date</td>
+                <td>@item.Time</td>
+                <td>@item.Service?.Name</td>
+                <td>@item.Trainer?.Name</td>
+                <td>@item.Price</td>
+
+                <td>
+                    @if (item.IsApproved)
+                    {
+                        <span class="badge bg-success">Onaylandı</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Bekliyor</span>
+                    }
+                </td>
+
+                <td>
+                    @* SADECE ADMIN ONAYLAYABİLİR *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @if (!item.IsApproved)
+                        {
+                            <a asp-action="Approve" asp-route-id="@item.Id"
+                               class="btn btn-sm btn-success">Onayla</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">—</span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+=======
     ViewData["Title"] = "Index";
 }
 
@@ -67,5 +134,6 @@
             </td>
         </tr>
 }
+>>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
     </tbody>
 </table>

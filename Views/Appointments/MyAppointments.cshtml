@@ -1,0 +1,62 @@
+@model IEnumerable<FitnessApp.Models.Appointment>
+
+<h2>Randevularım</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Hizmet</th>
+            <th>Eğitmen</th>
+            <th>Salon</th>
+            <th>Tarih</th>
+            <th>Saat</th>
+            <th>Durum</th>
+            <th>İşlem</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Service?.Name</td>
+                <td>@a.Trainer?.Name</td>
+                <td>@a.Gym?.Name</td>
+                <td>@a.Date</td>
+                <td>@a.Time</td>
+
+                <td>
+                    @if (a.IsApproved)
+                    {
+                        <span class="badge bg-success">Onaylandı</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Bekliyor</span>
+                    }
+                </td>
+                <td>
+                    @if (!a.IsApproved)  
+                    {
+                        <a asp-action="Cancel" asp-route-id="@a.Id"
+                        class="btn btn-danger btn-sm">
+                            İptal Et
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">—</span>
+                    }
+                </td>
+               
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>Henüz randevunuz yok.</p>
+}
