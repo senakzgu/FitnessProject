@@ -2,6 +2,18 @@
 
 <h2>Randevularım</h2>
 
+<!-- Uyarılar -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -12,14 +24,24 @@
             <th>Saat</th>
             <th>Durum</th>
             <th>İşlem</th>
-
         </tr>
     </thead>
 
     <tbody>
         @foreach (var a in Model)
         {
-            <tr>
+            // Randevu zamanını hesapla
+            var ts = TimeSpan.Parse(a.Time);
+            var appointmentDateTime = a.Date.ToDateTime(new TimeOnly(ts.Hours, ts.Minutes));
+
+            bool isPast = appointmentDateTime < DateTime.Now;
+
+            // İptal kuralları
+            bool canCancel =
+                (!a.IsApproved && !isPast) ||
+                (a.IsApproved && (appointmentDateTime - DateTime.Now).TotalHours >= 8);
+
+            <tr class="@((isPast ? "table-danger" : ""))">
                 <td>@a.Service?.Name</td>
                 <td>@a.Trainer?.Name</td>
                 <td>@a.Gym?.Name</td>
@@ -27,7 +49,11 @@
                 <td>@a.Time</td>
 
                 <td>
-                    @if (a.IsApproved)
+                    @if (isPast)
+                    {
+                        <span class="badge bg-secondary">Geçmiş</span>
+                    }
+                    else if (a.IsApproved)
                     {
                         <span class="badge bg-success">Onaylandı</span>
                     }
@@ -36,21 +62,18 @@
                         <span class="badge bg-warning text-dark">Bekliyor</span>
                     }
                 </td>
+
                 <td>
-                    @if (!a.IsApproved)  
+                    @if (canCancel)
                     {
                         <a asp-action="Cancel" asp-route-id="@a.Id"
-                        class="btn btn-danger btn-sm">
-                            İptal Et
-                        </a>
+                           class="btn btn-danger btn-sm">İptal Et</a>
                     }
                     else
                     {
                         <span class="text-muted">—</span>
                     }
                 </td>
-               
-
             </tr>
         }
     </tbody>

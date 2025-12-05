@@ -17,131 +17,131 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FitnessApp
 build_property.RootNamespace = FitnessApp
-build_property.ProjectDir = /Users/senakuzgu/Documents/GitHub/FitnessProject/
+build_property.ProjectDir = /Users/senakuzgu/Desktop/proje/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/senakuzgu/Documents/GitHub/FitnessProject
+build_property.MSBuildProjectDirectory = /Users/senakuzgu/Desktop/proje
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Account/Login.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Account/Register.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/Create.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/Delete.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/Details.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/Edit.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/Index.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Appointments/MyAppointments.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Appointments/MyAppointments.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBwb2ludG1lbnRzL015QXBwb2ludG1lbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Gyms/Create.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Gyms/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3ltcy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Gyms/Delete.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Gyms/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3ltcy9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Gyms/Details.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Gyms/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3ltcy9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Gyms/Edit.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Gyms/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3ltcy9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Gyms/Index.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Gyms/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3ltcy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Home/Index.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Home/Privacy.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Services/Create.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Services/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZXMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Services/Delete.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Services/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZXMvRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Services/Details.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Services/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZXMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Services/Edit.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Services/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZXMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Services/Index.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Services/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Shared/Error.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Trainers/Create.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Trainers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhaW5lcnMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Trainers/Delete.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Trainers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhaW5lcnMvRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Trainers/Details.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Trainers/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhaW5lcnMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Trainers/Edit.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Trainers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhaW5lcnMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Trainers/Index.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Trainers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhaW5lcnMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/_ViewImports.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/_ViewStart.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/senakuzgu/Documents/GitHub/FitnessProject/Views/Shared/_Layout.cshtml]
+[/Users/senakuzgu/Desktop/proje/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-eqcctk625w

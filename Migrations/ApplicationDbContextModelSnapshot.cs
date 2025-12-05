@@ -33,12 +33,9 @@ namespace FitnessApp.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-<<<<<<< HEAD
                     b.Property<int>("GymId")
                         .HasColumnType("integer");
 
-=======
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                     b.Property<bool>("IsApproved")
                         .HasColumnType("boolean");
 
@@ -57,7 +54,6 @@ namespace FitnessApp.Migrations
                     b.Property<int>("TrainerId")
                         .HasColumnType("integer");
 
-<<<<<<< HEAD
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
@@ -65,19 +61,11 @@ namespace FitnessApp.Migrations
 
                     b.HasIndex("GymId");
 
-=======
-                    b.HasKey("Id");
-
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                     b.HasIndex("ServiceId");
 
                     b.HasIndex("TrainerId");
 
-<<<<<<< HEAD
                     b.ToTable("Appointments");
-=======
-                    b.ToTable("Appointments", (string)null);
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Gym", b =>
@@ -96,11 +84,7 @@ namespace FitnessApp.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
                     b.ToTable("Gyms");
-=======
-                    b.ToTable("Gyms", (string)null);
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Service", b =>
@@ -127,11 +111,7 @@ namespace FitnessApp.Migrations
 
                     b.HasIndex("GymId");
 
-<<<<<<< HEAD
                     b.ToTable("Services");
-=======
-                    b.ToTable("Services", (string)null);
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Trainer", b =>
@@ -158,11 +138,7 @@ namespace FitnessApp.Migrations
 
                     b.HasIndex("GymId");
 
-<<<<<<< HEAD
                     b.ToTable("Trainers");
-=======
-                    b.ToTable("Trainers", (string)null);
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                 });
 
             modelBuilder.Entity("FitnessApp.Models.TrainerService", b =>
@@ -177,7 +153,6 @@ namespace FitnessApp.Migrations
 
                     b.HasIndex("ServiceId");
 
-<<<<<<< HEAD
                     b.ToTable("TrainerServices");
                 });
 
@@ -375,22 +350,16 @@ namespace FitnessApp.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-=======
-                    b.ToTable("TrainerServices", (string)null);
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                 });
 
             modelBuilder.Entity("FitnessApp.Models.Appointment", b =>
                 {
-<<<<<<< HEAD
                     b.HasOne("FitnessApp.Models.Gym", "Gym")
                         .WithMany()
                         .HasForeignKey("GymId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-=======
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                     b.HasOne("FitnessApp.Models.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
@@ -403,11 +372,8 @@ namespace FitnessApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
                     b.Navigation("Gym");
 
-=======
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
                     b.Navigation("Service");
 
                     b.Navigation("Trainer");
@@ -454,7 +420,6 @@ namespace FitnessApp.Migrations
                     b.Navigation("Trainer");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -506,8 +471,6 @@ namespace FitnessApp.Migrations
                         .IsRequired();
                 });
 
-=======
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
             modelBuilder.Entity("FitnessApp.Models.Service", b =>
                 {
                     b.Navigation("TrainerServices");

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj": {}
+    "/Users/senakuzgu/Desktop/proje/FitnessApp.csproj": {}
   },
   "projects": {
-    "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj": {
+    "/Users/senakuzgu/Desktop/proje/FitnessApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj",
+        "projectUniqueName": "/Users/senakuzgu/Desktop/proje/FitnessApp.csproj",
         "projectName": "FitnessApp",
-        "projectPath": "/Users/senakuzgu/Documents/GitHub/FitnessProject/FitnessApp.csproj",
+        "projectPath": "/Users/senakuzgu/Desktop/proje/FitnessApp.csproj",
         "packagesPath": "/Users/senakuzgu/.nuget/packages/",
-        "outputPath": "/Users/senakuzgu/Documents/GitHub/FitnessProject/obj/",
+        "outputPath": "/Users/senakuzgu/Desktop/proje/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/senakuzgu/.nuget/NuGet/NuGet.Config"
