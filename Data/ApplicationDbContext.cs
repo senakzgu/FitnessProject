@@ -1,21 +1,16 @@
-<<<<<<< HEAD
+
 using FitnessApp.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-=======
-using Microsoft.EntityFrameworkCore;
-using FitnessApp.Models;
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
+
 
 
 namespace FitnessApp.Data
 {
-<<<<<<< HEAD
+
     public class ApplicationDbContext : IdentityDbContext
-=======
-    public class ApplicationDbContext : DbContext
->>>>>>> 101432024641ce337e528306d3ec0ee1ec850162
+
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
